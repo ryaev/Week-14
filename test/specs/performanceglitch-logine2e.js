@@ -1,7 +1,5 @@
-import LandingPage from "../pageobjects/landingPage"
 import LandingPage from "../pageobjects/landingPage.js"
-
-import UserPage from "../pageobjects/userPage.js"
+import ProductsPage from "../pageobjects/productsPage.js"
 
 describe("Login from user", ()=>{
     beforeAll("Open browser", ()=>{
@@ -21,7 +19,7 @@ describe("Login from user", ()=>{
     })
 
     it("Verify user wellcome page", async ()=>{
-        await expect(UserPage.wellcomeText).toBeDisplayed();
-        await expect(UserPage.wellcomeText).toHaveTextContaining("Products");
+        await expect(ProductsPage.wellcomeText).toBeDisplayed();
+        await expect(ProductsPage.wellcomeText).toHaveTextContaining("Products");
     })
 })

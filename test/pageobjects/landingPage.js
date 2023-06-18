@@ -12,6 +12,10 @@ class LandingPage{
         return $("#login-button");
     }
 
+    get loginErrorMsg(){
+        return $("#login_button_container > div > form > div.error-message-container.error > h3");
+    }
+
     async loginButtonClick(){
         await this.loginButton.click();
     }
