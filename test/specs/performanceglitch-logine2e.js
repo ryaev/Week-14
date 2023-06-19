@@ -1,25 +1,28 @@
 import LandingPage from "../pageobjects/landingPage.js"
-import ProductsPage from "../pageobjects/productsPage.js"
+import { productsPage, itemOne } from "../pageobjects/productsPage.js"
 
-describe("Login from user", ()=>{
+describe("Performance glitch user login", ()=>{
+
     beforeAll("Open browser", ()=>{
         browser.setWindowSize (1440, 1024);
         browser.url("https://www.saucedemo.com/");
     })
 
-    it("Verify login", async()=>{
+    it("Perform user login", async()=>{
         await expect(LandingPage.loginButton).toBeDisplayed();
-        await LandingPage.loginButtonClick();
-
         await expect(LandingPage.userNameInput).toBeDisplayed();
         await expect(LandingPage.passwordInput).toBeDisplayed();
 
-        await LandingPage.login("standard_user", "secret_sauce");
+        await LandingPage.login("performance_glitch_user", "secret_sauce");
         await LandingPage.loginButtonClick();
-    })
 
-    it("Verify user wellcome page", async ()=>{
-        await expect(ProductsPage.wellcomeText).toBeDisplayed();
-        await expect(ProductsPage.wellcomeText).toHaveTextContaining("Products");
+        const dateLogin = new Date().getTime();
+        await expect(productsPage.titlePage).toBeDisplayed();
+        await expect(productsPage.titlePage).toHaveTextContaining("Products");
+        const dateResponse = new Date().getTime();
+        const timeResponse = dateResponse - dateLogin;
+        const optimalTime = 200;
+
+        expect(timeResponse).toBeLessThan(optimalTime);
     })
 })
