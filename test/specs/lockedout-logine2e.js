@@ -6,7 +6,7 @@ describe("Locked out user login attempt", ()=>{
         browser.url("https://www.saucedemo.com/");
     })
 
-    it("Perform user login", async()=>{
+    it("Perform locked out user login", async()=>{
         await expect(LandingPage.loginButton).toBeDisplayed();
         await expect(LandingPage.userNameInput).toBeDisplayed();
         await expect(LandingPage.passwordInput).toBeDisplayed();
@@ -15,8 +15,10 @@ describe("Locked out user login attempt", ()=>{
         await LandingPage.loginButtonClick();
     })
 
-    it("Check error message for blocked user", async ()=>{
+    it("Check and close error message for blocked user", async ()=>{
         await expect(LandingPage.loginErrorMsg).toBeDisplayed();
+        await expect(LandingPage.loginErrorButton).toBeDisplayed();
         await expect(LandingPage.loginErrorMsg).toHaveTextContaining("Epic sadface: Sorry, this user has been locked out.");
+        await LandingPage.loginErrorButtonClick();
     })
 })
